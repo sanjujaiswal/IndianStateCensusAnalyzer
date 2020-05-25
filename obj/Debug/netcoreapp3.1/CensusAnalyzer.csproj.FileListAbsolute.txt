@@ -1,0 +1,13 @@
+C:\Users\HP\source\repos\CensusAnalyzer\bin\Debug\netcoreapp3.1\CensusAnalyzer.exe
+C:\Users\HP\source\repos\CensusAnalyzer\bin\Debug\netcoreapp3.1\CensusAnalyzer.deps.json
+C:\Users\HP\source\repos\CensusAnalyzer\bin\Debug\netcoreapp3.1\CensusAnalyzer.runtimeconfig.json
+C:\Users\HP\source\repos\CensusAnalyzer\bin\Debug\netcoreapp3.1\CensusAnalyzer.runtimeconfig.dev.json
+C:\Users\HP\source\repos\CensusAnalyzer\bin\Debug\netcoreapp3.1\CensusAnalyzer.dll
+C:\Users\HP\source\repos\CensusAnalyzer\bin\Debug\netcoreapp3.1\CensusAnalyzer.pdb
+C:\Users\HP\source\repos\CensusAnalyzer\obj\Debug\netcoreapp3.1\CensusAnalyzer.csprojAssemblyReference.cache
+C:\Users\HP\source\repos\CensusAnalyzer\obj\Debug\netcoreapp3.1\CensusAnalyzer.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\CensusAnalyzer\obj\Debug\netcoreapp3.1\CensusAnalyzer.AssemblyInfoInputs.cache
+C:\Users\HP\source\repos\CensusAnalyzer\obj\Debug\netcoreapp3.1\CensusAnalyzer.AssemblyInfo.cs
+C:\Users\HP\source\repos\CensusAnalyzer\obj\Debug\netcoreapp3.1\CensusAnalyzer.dll
+C:\Users\HP\source\repos\CensusAnalyzer\obj\Debug\netcoreapp3.1\CensusAnalyzer.pdb
+C:\Users\HP\source\repos\CensusAnalyzer\obj\Debug\netcoreapp3.1\CensusAnalyzer.genruntimeconfig.cache
