@@ -52,7 +52,6 @@ namespace CensusAnalyzer
                 throw new StateCensusException(StateCensusException.TypeOfExceptions.INCORRECT_FILE, e.Message);
             }
         }
-
         //To check number of headers and also check its length, name is proper or not.
         public string[] numberOfHeader(string path, string[] userHeader)
         {

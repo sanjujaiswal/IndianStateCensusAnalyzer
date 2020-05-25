@@ -30,7 +30,7 @@ namespace CensusAnalyzerTest
             }
             catch (StateCensusException e)
             {
-                //If file is not present at the location
+                //If file is not present at the location.
                 Assert.AreEqual("file is not present on this location", e.Message);
             }
         }
