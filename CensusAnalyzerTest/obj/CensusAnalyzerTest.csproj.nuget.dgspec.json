@@ -4,14 +4,14 @@
     "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzerTest\\CensusAnalyzerTest.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzerTest\\CensusAnalyzerTest.csproj": {
+    "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzerTest\\CensusAnalyzerTest.csproj",
-        "projectName": "CensusAnalyzerTest",
-        "projectPath": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzerTest\\CensusAnalyzerTest.csproj",
+        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzer.csproj",
+        "projectName": "CensusAnalyzer",
+        "projectPath": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzer.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzerTest\\obj\\",
+        "outputPath": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -38,13 +38,115 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[15.0.5, )"
+            },
+            "LumenWorksCsvReader": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
+            "NUnit": {
+              "target": "Package",
+              "version": "[3.12.0, )"
+            },
+            "NUnit.Console": {
+              "target": "Package",
+              "version": "[3.11.1, )"
+            },
+            "NUnit.ConsoleRunner": {
+              "target": "Package",
+              "version": "[3.11.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.16.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzerTest\\CensusAnalyzerTest.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzerTest\\CensusAnalyzerTest.csproj",
+        "projectName": "CensusAnalyzerTest",
+        "projectPath": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzerTest\\CensusAnalyzerTest.csproj",
+        "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzerTest\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzer.csproj": {
+                "projectPath": "C:\\Users\\HP\\source\\repos\\CensusAnalyzer\\CensusAnalyzer.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "CsvHelper": {
+              "target": "Package",
+              "version": "[15.0.5, )"
+            },
+            "LumenWorksCsvReader": {
+              "target": "Package",
+              "version": "[4.0.0, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
               "version": "[16.4.0, )"
             },
-            "NUnit3TestAdapter": {
+            "NUnit.Console": {
               "target": "Package",
-              "version": "[3.15.1, )"
+              "version": "[3.11.1, )"
+            },
+            "NUnit.ConsoleRunner": {
+              "target": "Package",
+              "version": "[3.11.1, )"
+            },
+            "NUnit3TestAdapter": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.16.1, )"
             },
             "nunit": {
               "target": "Package",
