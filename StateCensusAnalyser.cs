@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using LumenWorks.Framework.IO.Csv;
+using System;
 using System.IO;
-using LumenWorks.Framework.IO.Csv;
-
 
 namespace CensusAnalyzer
 {
     public class StateCensusAnalyser
     {
-        public int csvFileReadMethod(string path, char userdelimeter)
+        public int csvFileReadMethod(string path, char entereddelimeter)
         {
             try
             {
@@ -37,7 +34,7 @@ namespace CensusAnalyzer
                     numberOfRecord++;
                 }
                 char csvFileDelimeter = loadCsvData.Delimiter;
-                if (!csvFileDelimeter.Equals(userdelimeter))
+                if (!csvFileDelimeter.Equals(entereddelimeter))
                 {
                     throw new StateCensusException(StateCensusException.TypeOfExceptions.INCORRECT_DELIMETER, "Incorrect Delimeter, Please enter correct delimeter");
                 }
@@ -53,7 +50,13 @@ namespace CensusAnalyzer
             }
         }
         //To check number of headers and also check its length, name is proper or not.
-        public string[] numberOfHeader(string path, string[] userHeader)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path">given path of csv file</param>
+        /// <param name="enteredHeader">check entered header</param>
+        /// <returns></returns>
+        public string[] numberOfHeader(string path, string[] enteredHeader)
         {
             try
             {
@@ -66,7 +69,7 @@ namespace CensusAnalyzer
                 //To get headers of csv file.
                 string[] storeHeaders = storeCSV.GetFieldHeaders();
 
-                if (userHeader.Length != storeHeaders.Length)
+                if (enteredHeader.Length != storeHeaders.Length)
                 {
                     throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_LENGTH_NOT_EQUAL, "Header length is not equal");
                 }
@@ -74,7 +77,7 @@ namespace CensusAnalyzer
                 for (int i = 0; i < storeHeaders.Length; i++)
                 {
                     //If header is match with userHeader then execute otherwise throw exception.
-                    if (!userHeader[i].Equals(storeHeaders[i]))
+                    if (!enteredHeader[i].Equals(storeHeaders[i]))
                     {
                         throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_NAME_NOT_CORRECT, "Header name is not right");
                     }

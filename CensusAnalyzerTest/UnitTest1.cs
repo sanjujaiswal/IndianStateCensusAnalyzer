@@ -42,7 +42,7 @@ namespace CensusAnalyzerTest
             {
                 StateCensusAnalyser read = new StateCensusAnalyser();
                 string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.txt";
-                //int record = read.csvFileReadMethod(path, ',');
+                int record = read.csvFileReadMethod(path, ',');
             }
             catch (StateCensusException e)
             {   // If ypu import wrong file
@@ -56,7 +56,7 @@ namespace CensusAnalyzerTest
             {
                 StateCensusAnalyser read = new StateCensusAnalyser();
                 string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
-                //int record = read.csvFileReadMethod(path, ';');
+                int record = read.csvFileReadMethod(path, ';');
             }
             catch (StateCensusException e)
             {
@@ -72,8 +72,8 @@ namespace CensusAnalyzerTest
                 StateCensusAnalyser read = new StateCensusAnalyser();
                 string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
                 string[] expectedHeader = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
-                string[] userHeader = { "State", "Population", "AreaInKm", "DensityPerSqKm" };
-                string[] header = read.numberOfHeader(path, userHeader);
+                string[] enteredHeader = { "State", "Population", "AreaInKm", "DensitySqKm" };
+                string[] header = read.numberOfHeader(path, enteredHeader);
                 for (int i = 0; i < header.Length; i++)
                 {
                     Assert.AreEqual(expectedHeader[i], header[i]);
@@ -86,14 +86,112 @@ namespace CensusAnalyzerTest
         }
 
         [Test]
-        public void CheckForWrongHeaderLength()
+        public void IncorrectHeaderLength()
         {
             try
             {
                 StateCensusAnalyser read = new StateCensusAnalyser();
                 string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
                 string[] expectedHeader = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
-                string[] userHeader = { "State", "Population", "DensityPerSqKm" };
+                string[] enteredHeader = { "State", "Population", "DensityPerSqKm" };
+                string[] header = read.numberOfHeader(path, enteredHeader);
+                for (int i = 0; i < header.Length; i++)
+                {
+                    Assert.AreEqual(expectedHeader[i], header[i]);
+                }
+            }
+            catch (StateCensusException e)
+            {
+                Assert.AreEqual("Header length is not equal", e.Message);
+            }
+
+        }
+
+        [Test]
+        public void TotalRecordInIndiaStateCode()
+        {
+            //object created for stateCensusAnalyser class 
+            CSVStateCensus read = new CSVStateCensus();
+            string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
+            int record = read.csvFileReadMethod(path, ',');
+            Assert.AreEqual(37, record);
+        }
+
+        [Test]
+        public void FileNotFoundForIndiaStateCodeCSVFile()
+        {
+            try
+            {
+                CSVStateCensus read = new CSVStateCensus();
+                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
+                int record = read.csvFileReadMethod(path, ',');
+            }
+            catch (StateCensusException e)
+            {
+                Assert.AreEqual("File is not present here", e.Message);
+            }
+        }
+      
+        [Test]
+        public void IncorrectFileOfIndiaStateCode()
+        {
+            try
+            {
+                CSVStateCensus read = new CSVStateCensus();
+                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
+                int record = read.csvFileReadMethod(path, ',');
+            }
+            catch (StateCensusException e)
+            {
+                Assert.AreEqual("Please enter proper file", e.Message);
+            }
+        }
+
+        [Test]
+        public void IncorrectDelimeterOfIndiaStateCode()
+        {
+            try
+            {
+                CSVStateCensus read = new CSVStateCensus();
+                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
+                int record = read.csvFileReadMethod(path, ';');
+            }
+            catch (StateCensusException e)
+            {
+                Assert.AreEqual("Incorrect Delimeter, Please enter correct delimeter", e.Message);
+            }
+        }
+
+        [Test]
+        public void IncorrectHeaderNamesOfIndiaStateCode()
+        {
+            try
+            {
+                CSVStateCensus read = new CSVStateCensus();
+                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
+                string[] expectedHeader = { "SrNo", "State", "Name", "TIN", "StateCode", "Column5" };
+                string[] userHeader = { "SrNo", "State", "Name", "TINNumber", "StateCode", "Column5" };
+                string[] header = read.numberOfHeader(path, userHeader);
+                for (int i = 0; i < header.Length; i++)
+                {
+                    Assert.AreEqual(expectedHeader[i], header[i]);
+                }
+            }
+            catch (StateCensusException e)
+            {
+                Assert.AreEqual("Header name is not right", e.Message);
+            }
+        }
+      
+        [Test]
+        public void HeaderLengthNotEqualofIndiaStateCode()
+        {
+            try
+            {
+                CSVStateCensus read = new CSVStateCensus();
+                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
+                string[] expectedHeader = { "SrNo", "State", "Name", "TIN", "StateCode", "Column5" };
+                string[] userHeader = { "SrNo", "State", "Name", "TIN"};
                 string[] header = read.numberOfHeader(path, userHeader);
                 for (int i = 0; i < header.Length; i++)
                 {
