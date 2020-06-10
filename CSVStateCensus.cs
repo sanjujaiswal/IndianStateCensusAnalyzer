@@ -4,7 +4,10 @@ using System.Text;
 
 namespace CensusAnalyzer
 {
-    class CSVStateCensus
+    public class CSVStateCensus:baseStateCensusAnalyser
     {
+        public CSVStateCensus(string Path) : base(Path)
+        { 
+        }
     }
 }
