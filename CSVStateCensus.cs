@@ -6,6 +6,7 @@ using LumenWorks.Framework.IO.Csv;
 
 namespace CensusAnalyzer
 {
+<<<<<<< HEAD
     public class CSVStateCensus
     {/// <summary>
     /// 
@@ -96,6 +97,12 @@ namespace CensusAnalyzer
                 throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_NAME_NOT_CORRECT, e.Message);
             }
 
+=======
+    public class CSVStateCensus:baseStateCensusAnalyser
+    {
+        public CSVStateCensus(string Path) : base(Path)
+        { 
+>>>>>>> Refactor_1
         }
     }
 }

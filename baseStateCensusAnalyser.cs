@@ -1,17 +1,26 @@
-﻿using LumenWorks.Framework.IO.Csv;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using System.IO;
+using LumenWorks.Framework.IO.Csv;
 
 namespace CensusAnalyzer
 {
-<<<<<<< HEAD
-    public class StateCensusAnalyser
+    public class baseStateCensusAnalyser
     {
-        public int csvFileReadMethod(string path, char entereddelimeter)
+        string Path
+        {
+            get; set;
+        }
+        public baseStateCensusAnalyser(string Path)
+        {
+            this.Path = Path;
+        }
+        public int csvFileReadMethod(char userdelimeter)
         {
             try
             {
-                FileInfo fileInfo = new FileInfo(path);
+                FileInfo fileInfo = new FileInfo(Path);
                 Console.WriteLine(fileInfo);
 
                 string typeOfFile = fileInfo.Extension;
@@ -23,19 +32,14 @@ namespace CensusAnalyzer
                 }
 
                 int numberOfRecord = 0;
-                //stream reader is used to read the data from csv file
-                using StreamReader readCsvData = new StreamReader(path);
-
-                //CsvReader is used to load the data on csvreade
+                using StreamReader readCsvData = new StreamReader(Path);
                 using CsvReader loadCsvData = new CsvReader(readCsvData, true);
-
-                //Iterate the csv file and ReadNextRecord() is used to read next record if present otherwise break.
                 while (loadCsvData.ReadNextRecord())
                 {
                     numberOfRecord++;
                 }
                 char csvFileDelimeter = loadCsvData.Delimiter;
-                if (!csvFileDelimeter.Equals(entereddelimeter))
+                if (!csvFileDelimeter.Equals(userdelimeter))
                 {
                     throw new StateCensusException(StateCensusException.TypeOfExceptions.INCORRECT_DELIMETER, "Incorrect Delimeter, Please enter correct delimeter");
                 }
@@ -50,35 +54,20 @@ namespace CensusAnalyzer
                 throw new StateCensusException(StateCensusException.TypeOfExceptions.INCORRECT_FILE, e.Message);
             }
         }
-        //To check number of headers and also check its length, name is proper or not.
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path">given path of csv file</param>
-        /// <param name="enteredHeader">check entered header</param>
-        /// <returns></returns>
-        public string[] numberOfHeader(string path, string[] enteredHeader)
+        public string[] numberOfHeader(string[] userHeader)
         {
             try
             {
-                //Stream reader is used to read the data from csv file.
-                StreamReader read = new StreamReader(path);
-
-                //CsvReader is used to load the data on storeCSV variable.
-                CsvReader storeCSV = new CsvReader(read, true);
-
-                //To get headers of csv file.
+                using StreamReader read = new StreamReader(Path);
+                using CsvReader storeCSV = new CsvReader(read, true);
                 string[] storeHeaders = storeCSV.GetFieldHeaders();
-
-                if (enteredHeader.Length != storeHeaders.Length)
+                if (userHeader.Length != storeHeaders.Length)
                 {
                     throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_LENGTH_NOT_EQUAL, "Header length is not equal");
                 }
-                //Iterate header
                 for (int i = 0; i < storeHeaders.Length; i++)
                 {
-                    //If header is match with userHeader then execute otherwise throw exception.
-                    if (!enteredHeader[i].Equals(storeHeaders[i]))
+                    if (!userHeader[i].Equals(storeHeaders[i]))
                     {
                         throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_NAME_NOT_CORRECT, "Header name is not right");
                     }
@@ -88,17 +77,7 @@ namespace CensusAnalyzer
             catch (StateCensusException e)
             {
                 throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_NAME_NOT_CORRECT, e.Message);
-=======
-        public class StateCensusAnalyser : baseStateCensusAnalyser
-        {
-            public StateCensusAnalyser(string Path) : base(Path)
-            { 
->>>>>>> Refactor_1
             }
-
-        public int csvFileReadMethod()
-        {
-            throw new NotImplementedException();
         }
     }
-  }
+}
