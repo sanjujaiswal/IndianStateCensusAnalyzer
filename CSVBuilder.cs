@@ -34,13 +34,13 @@ namespace CensusAnalyzer
 
                 }
 
-            if (numberOfRecords == 0)
+                if (numberOfRecords == 0)
                 {
                 throw new StateCensusException(StateCensusException.TypeOfExceptions.FILE_CONTAIN_NO_DATA, "This file does not contains any data or records");
                 }
-            return (records, headers, numberOfRecords);
+                return (records, headers, numberOfRecords);
             }
-            catch(StateCensusException e)
+            catch (StateCensusException e)
             {
                 Console.WriteLine(e.Message);
                 throw new StateCensusException(StateCensusException.TypeOfExceptions.FILE_CONTAIN_NO_DATA, e.Message);
