@@ -4,7 +4,6 @@ using System.IO;
 
 namespace CensusAnalyzer
 {
-<<<<<<< HEAD
     public class StateCensusAnalyser
     {
         public int csvFileReadMethod(string path, char entereddelimeter)
@@ -88,17 +87,19 @@ namespace CensusAnalyzer
             catch (StateCensusException e)
             {
                 throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_NAME_NOT_CORRECT, e.Message);
-=======
+            }
+        }
+ 
         public class StateCensusAnalyser : baseStateCensusAnalyser
         {
             public StateCensusAnalyser(string Path) : base(Path)
-            { 
->>>>>>> Refactor_1
+            {
             }
 
-        public int csvFileReadMethod()
-        {
-            throw new NotImplementedException();
+            public int csvFileReadMethod()
+            {
+                throw new NotImplementedException();
+            }
         }
     }
-  }
+}

@@ -5,9 +5,7 @@ namespace CensusAnalyzerTest
 {
     public class Tests
     {
-        //path of file StateCensusData.csv
         static string pathStateData = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
-        //create a object of stateCensusAnalyser class 
         StateCensusAnalyser read = new StateCensusAnalyser(pathStateData);
 
         [SetUp]
@@ -35,7 +33,6 @@ namespace CensusAnalyzerTest
             }
             catch (StateCensusException e)
             {
-                //If file is not present at the location.
                 Assert.AreEqual("File is not present here", e.Message);
             }
         }
@@ -46,15 +43,10 @@ namespace CensusAnalyzerTest
             try
             {
                 string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.txt";
-<<<<<<< HEAD
-                int record = read.csvFileReadMethod(path, ',');
-=======
                 StateCensusAnalyser read = new StateCensusAnalyser(path);
                 int record = read.csvFileReadMethod(',');
->>>>>>> Refactor_1
             }
             catch (StateCensusException e)
-            {   //Message popup,if extdension of file is wrong.
                 Assert.AreEqual("Please enter proper file", e.Message);
             }
         }
@@ -65,13 +57,7 @@ namespace CensusAnalyzerTest
         {
             try
             {
-<<<<<<< HEAD
-                StateCensusAnalyser read = new StateCensusAnalyser();
-                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
-                int record = read.csvFileReadMethod(path, ';');
-=======
                 int record = read.csvFileReadMethod(';');
->>>>>>> Refactor_1
             }
             catch (StateCensusException e)
             {
@@ -86,13 +72,8 @@ namespace CensusAnalyzerTest
             try
             {
                 string[] expectedHeader = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
-<<<<<<< HEAD
                 string[] enteredHeader = { "State", "Population", "AreaInKm", "DensitySqKm" };
-                string[] header = read.numberOfHeader(path, enteredHeader);
-=======
-                string[] userHeader = { "State", "Population", "AreaInKm", "DensityPerSqKm" };
                 string[] header = read.numberOfHeader(userHeader);
->>>>>>> Refactor_1
                 for (int i = 0; i < header.Length; i++)
                 {
                     Assert.AreEqual(expectedHeader[i], header[i]);
@@ -111,9 +92,8 @@ namespace CensusAnalyzerTest
             try
             {
                 string[] expectedHeader = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
-<<<<<<< HEAD
                 string[] enteredHeader = { "State", "Population", "DensityPerSqKm" };
-                string[] header = read.numberOfHeader(path, enteredHeader);
+                string[] header = read.numberOfHeader(enteredHeader);
                 for (int i = 0; i < header.Length; i++)
                 {
                     Assert.AreEqual(expectedHeader[i], header[i]);
@@ -123,109 +103,6 @@ namespace CensusAnalyzerTest
             {
                 Assert.AreEqual("Header length is not equal", e.Message);
             }
-
-        }
-
-        [Test]
-        public void TotalRecordInIndiaStateCode()
-        {
-            //object created for stateCensusAnalyser class 
-            CSVStateCensus read = new CSVStateCensus();
-            string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-            int record = read.csvFileReadMethod(path, ',');
-            Assert.AreEqual(37, record);
-        }
-
-        [Test]
-        public void FileNotFoundForIndiaStateCodeCSVFile()
-        {
-            try
-            {
-                CSVStateCensus read = new CSVStateCensus();
-                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-                int record = read.csvFileReadMethod(path, ',');
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("File is not present here", e.Message);
-            }
-        }
-      
-        [Test]
-        public void IncorrectFileOfIndiaStateCode()
-        {
-            try
-            {
-                CSVStateCensus read = new CSVStateCensus();
-                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-                int record = read.csvFileReadMethod(path, ',');
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Please enter proper file", e.Message);
-            }
-        }
-
-        [Test]
-        public void IncorrectDelimeterOfIndiaStateCode()
-        {
-            try
-            {
-                CSVStateCensus read = new CSVStateCensus();
-                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-                int record = read.csvFileReadMethod(path, ';');
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Incorrect Delimeter, Please enter correct delimeter", e.Message);
-            }
-        }
-
-        [Test]
-        public void IncorrectHeaderNamesOfIndiaStateCode()
-        {
-            try
-            {
-                CSVStateCensus read = new CSVStateCensus();
-                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
-                string[] expectedHeader = { "SrNo", "State", "Name", "TIN", "StateCode", "Column5" };
-                string[] userHeader = { "SrNo", "State", "Name", "TINNumber", "StateCode", "Column5" };
-                string[] header = read.numberOfHeader(path, userHeader);
-                for (int i = 0; i < header.Length; i++)
-                {
-                    Assert.AreEqual(expectedHeader[i], header[i]);
-                }
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Header name is not right", e.Message);
-            }
-        }
-      
-        [Test]
-        public void HeaderLengthNotEqualofIndiaStateCode()
-        {
-            try
-            {
-                CSVStateCensus read = new CSVStateCensus();
-                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-                string[] expectedHeader = { "SrNo", "State", "Name", "TIN", "StateCode", "Column5" };
-                string[] userHeader = { "SrNo", "State", "Name", "TIN"};
-                string[] header = read.numberOfHeader(path, userHeader);
-=======
-                string[] userHeader = { "State", "Population", "DensityPerSqKm" };
-                string[] header = read.numberOfHeader(userHeader);
->>>>>>> Refactor_1
-                for (int i = 0; i < header.Length; i++)
-                {
-                    Assert.AreEqual(expectedHeader[i], header[i]);
-                }
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Header length is not equal", e.Message);
-            }
-
         }
     }
     class CSVStateCode
