@@ -8,6 +8,9 @@ namespace CensusAnalyzer
 {
     class CSVBuilder : InterfaceCSVStateCensusAnalyser
     {
+        /// <summary>
+        /// Data stored into array like records,headers.
+        /// </summary>
         public string[] records;
         public string[] headers;
         public int numberOfRecords;
@@ -63,6 +66,10 @@ namespace CensusAnalyzer
                 throw new Exception(e.Message);
             }
         }
+        /// <summary>
+        /// Get records
+        /// </summary>
+        /// <returns></returns>
 
         public string[] GetRecord()
         {
