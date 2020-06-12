@@ -8,6 +8,9 @@ namespace CensusAnalyzer
 {
     class CSVBuilder : InterfaceCSVStateCensusAnalyser
     {
+        public string[] records;
+        public string[] headers;
+        public int numberOfRecords;
         public dynamic readData(string Path)
         {
             try
@@ -31,7 +34,6 @@ namespace CensusAnalyzer
                     {
                         Console.WriteLine(" ", Record);
                     }
-
                 }
 
                 if (numberOfRecords == 0)
@@ -62,5 +64,17 @@ namespace CensusAnalyzer
             }
         }
 
+        public string[] GetRecord()
+        {
+            return records;
+        }
+        public string[] GetHeader()
+        {
+            return headers;
+        }
+        public int GetNumberOfRecord()
+        {
+            return numberOfRecords;
+        }
     }
 }
