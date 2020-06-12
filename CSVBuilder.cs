@@ -33,13 +33,34 @@ namespace CensusAnalyzer
                     }
 
                 }
-                return (records, headers, numberOfRecords);
+
+            if (numberOfRecords == 0)
+                {
+                throw new StateCensusException(StateCensusException.TypeOfExceptions.FILE_CONTAIN_NO_DATA, "This file does not contains any data or records");
+                }
+            return (records, headers, numberOfRecords);
+            }
+            catch(StateCensusException e)
+            {
+                Console.WriteLine(e.Message);
+                throw new StateCensusException(StateCensusException.TypeOfExceptions.FILE_CONTAIN_NO_DATA, e.Message);
+            }
+            catch (FileNotFoundException e)
+            {
+                Console.WriteLine(e.Message);
+                throw new FileNotFoundException(e.Message);
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine(e.Message);
+                throw new IndexOutOfRangeException(e.Message);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return e.Message;
+                throw new Exception(e.Message);
             }
         }
+
     }
 }
