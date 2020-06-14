@@ -4,8 +4,8 @@ using System.Text;
 
 namespace CensusAnalyzer
 {
-    class InterfaceCSVStateCensusAnalyser
+    public interface InterfaceCSVStateCensusAnalyser
     {
-        public dynamic readData(string Path);
+        public dynamic ReadData(string Path,int jsonFormate,int sorting, int columnNumber);
     }
 }

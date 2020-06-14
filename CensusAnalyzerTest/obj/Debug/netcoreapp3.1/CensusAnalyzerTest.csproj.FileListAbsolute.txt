@@ -100,3 +100,11 @@ C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3
 C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.VisualStudio.TestPlatform.Common.resources.dll
 C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\obj\Debug\netcoreapp3.1\CensusAnalyzerTest.genruntimeconfig.cache
 C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\obj\Debug\netcoreapp3.1\CensusAnalyzerTest.csproj.CoreCompileInputs.cache
+C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.dll
+C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.FileExtensions.dll
+C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Json.dll
+C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Abstractions.dll
+C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileProviders.Physical.dll
+C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.FileSystemGlobbing.dll
+C:\Users\HP\source\repos\CensusAnalyzer\CensusAnalyzerTest\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Primitives.dll

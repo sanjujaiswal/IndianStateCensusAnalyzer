@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using CensusAnalyzer;
+using System;
 
 namespace CensusAnalyzer
 {
-    public class Program
+    class Program
     {
-        static void Main(string[] args)
+        static void main1(string[] args)
         {
             Console.WriteLine("Welcome to Indian States Census Analyser Program!!");
         }
