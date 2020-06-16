@@ -6,7 +6,7 @@ using LumenWorks.Framework.IO.Csv;
 
 namespace CensusAnalyzer
 {
-    public class CSVStateCensus : baseStateCensusAnalyser
+    public class CSVStateCensus : CsvStateCensusReadRecord
     {
         public CSVStateCensus(string Path) : base(Path)
         {

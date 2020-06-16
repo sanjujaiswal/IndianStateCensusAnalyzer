@@ -1,83 +1,203 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
-using System.Text;
 using System.IO;
-using LumenWorks.Framework.IO.Csv;
+using CsvReader = LumenWorks.Framework.IO.Csv.CsvReader;
 
 namespace CensusAnalyzer
 {
-    public class baseStateCensusAnalyser
+    public class CsvStateCensusReadRecord
     {
-        string Path
+        // Variables declarations
+        string actualPath;
+        char delimeter;
+        int numberOfRecord;
+
+        // Default Constructor
+        public CsvStateCensusReadRecord()
         {
-            get; set;
         }
-        public baseStateCensusAnalyser(string Path)
+
+        //Parameterised constructor
+        public CsvStateCensusReadRecord(string filePath = null)
         {
-            this.Path = Path;
+            this.actualPath = filePath;
         }
-        public int csvFileReadMethod(char userdelimeter)
+
+        // Declaration of ReadRecords Method
+        public object ReadRecords(string[] passHeader = null, char in_delimeter = ',', string filePath = null)
         {
             try
             {
-                FileInfo fileInfo = new FileInfo(Path);
-                Console.WriteLine(fileInfo);
-
-                string typeOfFile = fileInfo.Extension;
-                Console.WriteLine(typeOfFile);
-                string expectedType = ".csv";
-                if (typeOfFile != expectedType)
+                if (!filePath.Contains(".csv"))
                 {
-                    throw new StateCensusException(StateCensusException.TypeOfExceptions.INCORRECT_FILE, "Please enter proper file");
+                    throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.INVALID_EXTENSION_OF_FILE, "Invalid Extension of file");
+                }
+                else if (!filePath.Contains(actualPath))
+                {
+                    throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, "Invalid file");
                 }
 
-                int numberOfRecord = 0;
-                using StreamReader readCsvData = new StreamReader(Path);
-                using CsvReader loadCsvData = new CsvReader(readCsvData, true);
-                while (loadCsvData.ReadNextRecord())
+                CsvReader csvRecords = new CsvReader(new StreamReader(filePath), true);
+                int fieldCount = csvRecords.FieldCount;
+                string[] headers = csvRecords.GetFieldHeaders();
+                delimeter = csvRecords.Delimiter;
+                // string ArrayList
+                List<string[]> record = new List<string[]>();
+                while (csvRecords.ReadNextRecord())
                 {
+                    string[] tempRecord = new string[fieldCount];
+                    csvRecords.CopyCurrentRecordTo(tempRecord);
+                    record.Add(tempRecord);
                     numberOfRecord++;
                 }
-                char csvFileDelimeter = loadCsvData.Delimiter;
-                if (!csvFileDelimeter.Equals(userdelimeter))
+
+                if (numberOfRecord == 0)
                 {
-                    throw new StateCensusException(StateCensusException.TypeOfExceptions.INCORRECT_DELIMETER, "Incorrect Delimeter, Please enter correct delimeter");
+                    throw new CSVException(CSVException.ExceptionType.FILE_IS_EMPTY, "This file does not contains any data");
+                }
+                if (!in_delimeter.Equals(delimeter))
+                {
+                    throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.INCORRECT_DELIMETER, "Incorrect Delimeter");
+                }
+                else if (!IsHeaderSame(passHeader, headers))
+                {
+                    throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.INVALID_HEADER_ERROR, "Invalid Header");
                 }
                 return numberOfRecord;
             }
-            catch (FileNotFoundException)
+            catch (CensusAnalyserException file_not_found)
             {
-                throw new StateCensusException(StateCensusException.TypeOfExceptions.FILE_NOT_FOUND, "File is not present here");
+                return file_not_found.Message;
             }
-            catch (StateCensusException e)
+            catch (CSVException emptyFileException)
             {
-                throw new StateCensusException(StateCensusException.TypeOfExceptions.INCORRECT_FILE, e.Message);
+                return emptyFileException.Message;
             }
-        }
-        public string[] numberOfHeader(string[] userHeader)
+            catch (Exception exception)
+            {
+                throw new Exception(exception.Message);
+            }
+        }// End of ReadRecords
+
+        //method will compare two headers 
+        // if same return true , if not return false
+        private bool IsHeaderSame(string[] passHeader, string[] headers)
         {
-            try
+            if (passHeader.Length != headers.Length)
             {
-                using StreamReader read = new StreamReader(Path);
-                using CsvReader storeCSV = new CsvReader(read, true);
-                string[] storeHeaders = storeCSV.GetFieldHeaders();
-                if (userHeader.Length != storeHeaders.Length)
+                return false;
+            }
+            for (int i = 0; i < headers.Length; i++)
+            {
+                // ToLower() :- Returns a copy of string converted to lowercase
+                if (headers[i].ToLower().CompareTo(passHeader[i].ToLower()) != 0)
                 {
-                    throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_LENGTH_NOT_EQUAL, "Header length is not equal");
+                    return false;
                 }
-                for (int i = 0; i < storeHeaders.Length; i++)
+            }
+            return true;
+        }//End of isHeadersame
+
+        /// <summary>
+        /// Declare Dictionary to store its key and value
+        /// into it.
+        /// </summary>
+        /// <param name="records"></param>
+        /// <returns></returns>
+        public int CountRecords(string[] records)
+        {
+            int j = 1;
+            Dictionary<int, Dictionary<string, string>> map = new Dictionary<int, Dictionary<string, string>>();
+            string[] key = records[0].Split(',');
+            for (int i = 1; i < records.Length; i++)
+            {
+                string[] value = records[i].Split(',');
+                Dictionary<string, string> maping = new Dictionary<string, string>()
                 {
-                    if (!userHeader[i].Equals(storeHeaders[i]))
+                  { key[0], value[0] },
+                  { key[1], value[1] },
+                  { key[2], value[2] },
+                  { key[3], value[3] },
+                };
+                map.Add(j, maping);
+                j++;
+            }
+            return map.Count;
+        }
+
+        /// <summary>
+        /// Sorting json data based on key
+        /// </summary>
+        /// <param name="jsonFilePath"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static JArray SortingJsonBasedOnKey(string jsonFilePath, string key)
+        {
+            string jsonFile = File.ReadAllText(jsonFilePath);
+            JArray CensusArray = JArray.Parse(jsonFile);
+            //bubble sort
+            for (int i = 0; i < CensusArray.Count - 1; i++)
+            {
+                for (int j = 0; j < CensusArray.Count - i - 1; j++)
+                {
+                    if (CensusArray[j][key].ToString().CompareTo(CensusArray[j + 1][key].ToString()) > 0)
                     {
-                        throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_NAME_NOT_CORRECT, "Header name is not right");
+                        var temp = CensusArray[j + 1];
+                        CensusArray[j + 1] = CensusArray[j];
+                        CensusArray[j] = temp;
                     }
                 }
-                return storeHeaders;
             }
-            catch (StateCensusException e)
+            return CensusArray;
+        }
+
+        public static JArray SortJsonBasedOnKeyAndValueIsNumber(string jsonPath, string key)
+        {
+            string jsonFile = File.ReadAllText(jsonPath);
+            //parsing a json file
+            JArray CensusArray = JArray.Parse(jsonFile);
+            //sorting in sorting in ascending order
+            for (int i = 0; i < CensusArray.Count - 1; i++)
             {
-                throw new StateCensusException(StateCensusException.TypeOfExceptions.HEADER_NAME_NOT_CORRECT, e.Message);
+                for (int j = 0; j < CensusArray.Count - i - 1; j++)
+                {
+                    if ((int)CensusArray[j][key] > (int)CensusArray[j + 1][key])
+                    {
+                        var temp = CensusArray[j + 1];
+                        CensusArray[j + 1] = CensusArray[j];
+                        CensusArray[j] = temp;
+                    }
+                }
             }
+            return CensusArray;
+        }
+
+        /// <summary>
+        /// Method to retrive the first state data
+        /// </summary>
+        /// <param name="jsonPath"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string RetriveFirstDataOnKey(string jsonPath, string key)
+        {
+            string jsonFileText = File.ReadAllText(jsonPath);
+            JArray jArray = JArray.Parse(jsonFileText);
+            string firstValue = jArray[0][key].ToString();
+            return firstValue;
+        }
+        /// <summary>
+        /// Method to retrive the last state data
+        /// </summary>
+        /// <param name="jsonPath"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string RetriveLastDataOnKey(string jsonPath, string key)
+        {
+            string jsonFileText = File.ReadAllText(jsonPath);
+            JArray jArray = JArray.Parse(jsonFileText);
+            string lastValue = jArray[jArray.Count - 1][key].ToString();
+            return lastValue;
         }
     }
 }

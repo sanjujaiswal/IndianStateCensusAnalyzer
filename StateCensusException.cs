@@ -4,16 +4,23 @@ using System.Text;
 
 namespace CensusAnalyzer
 {
-    public class StateCensusException : Exception
+    public class CensusAnalyserException : Exception
     {
-        public enum TypeOfExceptions
+        // ExceptionType variable declared
+        ExceptionType exception;
+
+        // enum declaration to give constant values
+        public enum ExceptionType
         {
-            INCORRECT_FILE, FILE_NOT_FOUND, NAME_IS_NOT_CORRECT, INCORRECT_DELIMETER, INCORRECT_HEADER, HEADER_NAME_NOT_CORRECT, HEADER_LENGTH_NOT_EQUAL, FILE_CONTAIN_NO_DATA
+            FILE_NOT_FOUND,
+            INVALID_EXTENSION_OF_FILE,
+            INCORRECT_DELIMETER,
+            INVALID_HEADER_ERROR
         }
-        public TypeOfExceptions type;
-        public StateCensusException(TypeOfExceptions type, string message) : base(message)
+
+        public CensusAnalyserException(ExceptionType exception, string exceptionMessage) : base(exceptionMessage)
         {
-            this.type = type;
+            this.exception = exception;
         }
     }
 }
