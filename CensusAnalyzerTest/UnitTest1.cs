@@ -1,408 +1,205 @@
 using CensusAnalyzer;
-using Newtonsoft.Json;
 using NUnit.Framework;
+using static CensusAnalyzer.StateCensusAnalyserDao;
+using static CensusAnalyzer.CsvStatesDao;
 
-namespace CensusAnalyzerTest
+namespace Tests
 {
-    public class Tests
+    public class CensusTests
     {
-        static string pathStateData = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
-        StateCensusAnalyser read = new StateCensusAnalyser(pathStateData);
+        readonly CsvStateCensusDataDao stateCensus = CSVFactory.DelegateOfStateCensusAnalyser();
+        readonly CsvStateCodeDataDao stateCode = CSVFactory.DelegateOfCsvStates();
+
+        // FilePath ,Valid and Invalid Headers of StateCensusData
+        public string stateCensusDataPath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
+        public string wrongStateCensusDataPath = @"C:\Users\HP\source\repos\CensusAnalyzer\WrongIndiaStateCensusData.csv";
+        public string wrongStateCensusDataPathExtension = @"C:\Users\Admin\source\repos\CensusAnalyserProblem\CensusAnalyserProblem\IndiaStateCensusData.txt";
+        public string[] headerStateCensus = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
+        public string[] invalidHeaderStateCensus = { "State", "InvalidHeader", "AreaInSqKm", "DensityPerSqKm" };
+
+        // Given File Path valid and invalid names.
+        //Given Header valid and invalid names.
+        public string stateCodePath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
+        public string wrongStateCodePath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
+        public string wrongStateCodePathExtension = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.txt";
+        public string[] headerStateCode = { "SrNo", "State", "PIN", "StateCode" };
+        public string[] invalidHeaderStateCode = { "SrNo", "StateInvalid", "PIN", "StateCode" };
+
+        // Delimeter declaration
+        char delimeter = ',';
+        char IncorrectDelimeter = ';';
+
+        // JSON file path
+        public string jsonPathstateCensus = @"C:\Users\HP\source\repos\CensusAnalyzer\StateCensusData.json";
+        public string jsonPathstateCode = @"C:\Users\HP\source\repos\CensusAnalyzer\StateCode.json";
 
         [SetUp]
         public void Setup()
         {
         }
 
-        /// Test 1
-        [Test]
-        public void CheckNumberOfRecordMatches()
-        {
-            int record = read.csvFileReadMethod(',');
-            Assert.AreEqual(29, record);
-        }
-
-        //Test 2
-        [Test]
-        public void CheckFileNotFoundException()
-        {
-            try
-            {
-                string path = @"C:\Users\HP\source\repos\CabServices\IndiaStateCensusData.csv";
-                StateCensusAnalyser read = new StateCensusAnalyser(path);
-                int record = read.csvFileReadMethod(',');
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("File is not present here", e.Message);
-            }
-        }
-
-        [Test]
-        public void CheckWrongFileType()
-        {
-            try
-            {
-                string path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.txt";
-                StateCensusAnalyser read = new StateCensusAnalyser(path);
-                int record = read.csvFileReadMethod(',');
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Please enter proper file", e.Message);
-            }
-        }
-
-        //Test3
-        [Test]
-        public void CheckIncorrectDelimeter()
-        {
-            try
-            {
-                int record = read.csvFileReadMethod(';');
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Incorrect Delimeter, Please enter correct delimeter", e.Message);
-            }
-        }
-
-        //Test4
-        [Test]
-        public void CheckIncorrectHeaderNames()
-        {
-            try
-            {
-                string[] expectedHeader = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
-                string[] enteredHeader = { "State", "Population", "AreaInKm", "DensitySqKm" };
-                string[] header = read.numberOfHeader(enteredHeader);
-                for (int i = 0; i < header.Length; i++)
-                {
-                    Assert.AreEqual(expectedHeader[i], header[i]);
-                }
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Header name is not right", e.Message);
-            }
-        }
-
-        //Test 5 
-        [Test]
-        public void IncorrectHeaderLength()
-        {
-            try
-            {
-                string[] expectedHeader = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
-                string[] enteredHeader = { "State", "Population", "DensityPerSqKm" };
-                string[] header = read.numberOfHeader(enteredHeader);
-                for (int i = 0; i < header.Length; i++)
-                {
-                    Assert.AreEqual(expectedHeader[i], header[i]);
-                }
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Header length is not equal", e.Message);
-            }
-        }
-    }
-    public class CSVStateCode
-    {
-        static string pathStateData = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-        CSVStateCensus readCSVStateCode = new CSVStateCensus(pathStateData);
-
-        [SetUp]
-        public void SetUp()
-        {
-        }
-        // Test 1
-        [Test]
-        public void TotalRecordInCSVStateCode()
-        {
-            int record = readCSVStateCode.csvFileReadMethod(',');
-            Assert.AreEqual(37, record);
-        }
-
-        [Test]
-        public void FileNotFoundOfCSVStateCode()
-        {
-            try
-            {
-                string Path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-                CSVStateCensus readCSVStateCode = new CSVStateCensus(Path);
-                int record = readCSVStateCode.csvFileReadMethod(',');
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("File is not present here", e.Message);
-            }
-        }
-
-        [Test]
-        public void WrongFileTypeOfCSVStateCode()
-        {
-            try
-            {
-                string Path = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-                CSVStateCensus readCSVStateCode = new CSVStateCensus(Path);
-                int record = readCSVStateCode.csvFileReadMethod(',');
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Please enter proper file", e.Message);
-            }
-        }
-
-        [Test]
-        public void WrongDelimeterOfCSVStateCode()
-        {
-            try
-            {
-                int record = readCSVStateCode.csvFileReadMethod(',');
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Incorrect Delimeter, Please enter correct delimeter", e.Message);
-            }
-        }
-
-        [Test]
-        public void WrongHeaderOfCSVStateCode()
-        {
-            try
-            {
-                string[] expectedHeader = { "SrNo", "State Name", "TIN", "StateCode" };
-                string[] userHeader = { "SrNo", "State Name", "TIN", "State" };
-                string[] header = readCSVStateCode.numberOfHeader(userHeader);
-                for (int i = 0; i < header.Length; i++)
-                {
-                    Assert.AreEqual(expectedHeader[i], userHeader[i]);
-                }
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Header name is not right", e.Message);
-            }
-        }
-
-        [Test]
-        public void WrongHeaderLengthOfCSVStateCode()
-        {
-            try
-            {
-                string[] expectedHeader = { "SrNo", "State Name", "TIN", "StateCode" };
-                string[] userHeader = { "SrNo", "State Name", "TIN" };
-                string[] header = readCSVStateCode.numberOfHeader(userHeader);
-                for (int i = 0; i < header.Length; i++)
-                {
-                    Assert.AreEqual(expectedHeader[i], userHeader[i]);
-                }
-            }
-            catch (StateCensusException e)
-            {
-                Assert.AreEqual("Header length is not equal", e.Message);
-            }
-        }
-    }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    public class CsvStateDataUsing_CsvBuilder
-    {
-        static string pathStateData = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
-        [SetUp]
-        public void Setup()
-        {
-
-        }
-        /*
-        [Test]
-        public void checkForHeadersInCsvData()
-        {
-            string[] expectedHeader = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
-            int jsonForm = 1;
-            int sorting = 1;
-            int columnNumber = 0;
-
-            CSVBuilder state = new CSVBuilder(pathStateData, jsonForm, sorting, columnNumber);
-            var output = state.getHeaders();
-
-            for (int i = 0; i < expectedHeader.Length; i++)
-            { 
-                Assert.AreEqual(expectedHeader[i], output[i]);
-            }
-
-        }
-        */
-
-        [Test]
-        public void FirstStateIn_CsvData()
-        {
-            var expectedState = "Andhra Pradesh";
-            int jasonForm = 0;
-            int sorting = 0;
-            int columnNumber = 0;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var firstState = state.getSortedRecords();
-            firstState = firstState[0];
-            Assert.AreEqual(expectedState, firstState);
-        }
-
-        [Test]
-        public void LastStateIn_CsvData()
-        {
-            var expectedState = "West Bengal";
-            int jasonForm = 0;
-            int sorting = 0;
-            int columnNumber = 0;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-
-            var lastState = state.getSortedRecords();
-            var LastStateName = state.getSortedRecords();
-
-            lastState = lastState[lastState];
-            Assert.AreEqual(expectedState, LastStateName);
-        }
-
-        [Test]
-        public void TotalRecordsIn_CsvData()
-        {
-            int jasonForm = 1;
-            int sorting = 1;
-            int columnNumber = 0;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var numberOfRecord = state.getSortedRecords();
-            Assert.AreEqual(29, numberOfRecord);
-        }
-
-        [Test]
-        public void FirstStateIn_JSONFormate()
-        {
-            int jasonForm = 0;
-            int sorting = 0;
-            int columnNumber = 0;
-            CSVData csvStates = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var sortedInJsonFormate = csvStates.getSortedRecords();
-            var sortedList = JsonConvert.DeserializeObject(sortedInJsonFormate);
-            string first = sortedList[0];
-            Assert.AreEqual("Andhra Pradesh", first);
-        }
         /// <summary>
-        /// 
+        /// Check for number of records matches or not
+        /// If not then generate exception
         /// </summary>
         [Test]
-        public void LastStateNameIn_JSONFormate()
+        public void GivenNumberOfRecordsIfMatches_ShouldReturnRecords()
         {
-            int jasonForm = 0;
-            int sorting = 0;
-            int columnNumber = 0;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var sortedJsonFile = state.getSortedRecords();
-            //Deserealize from object to list
-            var sortedList = JsonConvert.DeserializeObject(sortedJsonFile);
-            string lastState = sortedList[state.getTotalRecords()];
-            Assert.AreEqual("West Bengal", lastState);
+            var numberOfRecords = stateCensus(headerStateCensus, delimeter, stateCensusDataPath);
+            Assert.AreEqual(29, numberOfRecords);
         }
-    }
 
-    public class CsvCodeDataTestThrough_CsvBuilder
-    {
-        static string pathStateData = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-
-        [SetUp]
-        public void Setup()
-        {
-
-        }
-        [Test]
-        public void HeadersIn_CsvCode()
-        {
-            string[] expectedHeader = { "SrNo", "StateName", "TIN", "StateCode" };
-            int jasonForm = 1;
-            int sorting = 1;
-            int columnNumber = 3;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var output = state.getHeaders();
-
-            for (int i = 0; i < expectedHeader.Length; i++)
-            {
-
-                Assert.AreEqual(expectedHeader[i], output[i]);
-            }
-
-
-        }
         /// <summary>
-        /// 
+        /// Check if incorrect file passed.
         /// </summary>
         [Test]
-        public void FirstStateIn_CSVCode()
+        public void GivenIncorrectCSVFile_ShouldReturnInvalidFile()
         {
-            var expectedState = "AD";
-            int jasonForm = 0;
-            int sorting = 0;
-            int columnNumber = 3;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var firstState = state.getTotalRecords();
-            firstState = firstState[0];
-            Assert.AreEqual(expectedState, firstState);
+            object exceptionMessage = stateCensus(headerStateCensus, delimeter, wrongStateCensusDataPath);
+            Assert.AreEqual("Invalid file", exceptionMessage);
         }
+
         /// <summary>
-        /// 
+        /// Check if incorrect extension is passed.
+        /// Then it will return Invalid extension of file.
         /// </summary>
         [Test]
-        public void LastStateIn_CsvCode()
+        public void GivenInCorrectDotExtensionFile_ShouldReturnInvalidExtension()
         {
-            var expectedState = "WB";
-            int jasonForm = 0;
-            int sorting = 0;
-            int columnNumber = 3;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var lastRecordNumber = state.getTotalRecords();
-            var LastStateName = state.getSortedRecords();
-            LastStateName = LastStateName[lastRecordNumber];
-            Assert.AreEqual(expectedState, LastStateName);
+            object exceptionMessage = stateCensus(headerStateCensus, delimeter, wrongStateCensusDataPathExtension);
+            Assert.AreEqual("Invalid Extension of file", exceptionMessage);
         }
 
+        /// <summary>
+        /// If incorrect delimeter is passed 
+        /// then it will return incorrect delimeter exception.
+        /// </summary>
         [Test]
-        public void FirstStateOf_JSONFormat()
+        public void GivenDelimeter_ShouldReturnIncorrectDelimeter()
         {
-            int jasonForm = 0;
-            int sorting = 0;
-            int columnNumber = 3;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var sortedJsonFile = state.getSortedRecords();
-            var sortedList = JsonConvert.DeserializeObject(sortedJsonFile);
-            string first = sortedList[0];
-            Assert.AreEqual("AD", first);
-
+            object exceptionMessage = stateCensus(headerStateCensus, IncorrectDelimeter, stateCensusDataPath);
+            Assert.AreEqual("Incorrect Delimeter", exceptionMessage);
         }
 
+        /// <summary>
+        /// If invalid header is pass then it will generate exception
+        /// like Invalid Header.
+        /// </summary>
         [Test]
-        public void LastStateOf_JSONFormat()
+        public void GivenUserHeader_ShouldReturnInvalidHeader()
         {
-            int jasonForm = 0;
-            int sorting = 0;
-            int columnNumber = 3;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var sortedJsonFile = state.getSortedRecords();
-            var sortedList = JsonConvert.DeserializeObject(sortedJsonFile);
-            string lastState = sortedList[state.getTotalRecords()];
-            Assert.AreEqual("WB", lastState);
-
+            object exceptionMessage = stateCensus(invalidHeaderStateCensus, delimeter, stateCensusDataPath);
+            Assert.AreEqual("Invalid Header", exceptionMessage);
         }
 
+        /// <summary>
+        /// Check for number of records is matches.
+        /// </summary>
         [Test]
-        public void TotalRecordsIn_CsvCode()
+        public void GivenNumberOfRecordsMatchesStateCode_ShouldReturnNumberOfRecords()
         {
-            int jasonForm = 1;
-            int sorting = 1;
-            int columnNumber = 3;
-            CSVData state = new CSVData(pathStateData, jasonForm, sorting, columnNumber);
-            var numberOfRecord = state.getTotalRecords();
-            Assert.AreEqual(37, numberOfRecord);
+            var numberOfRecords = stateCode(headerStateCode, delimeter, stateCodePath);
+            Assert.AreEqual(37, numberOfRecords);
+        }
+
+        /// <summary>
+        /// Check when incorrect csv file pass
+        /// then return Invalid file.
+        /// </summary>
+        [Test]
+        public void GivenInvalidCSVFileStateCode_ShouldReturnIncorrectCSVFile()
+        {
+            object exceptionMessage = stateCode(headerStateCode, delimeter, wrongStateCodePath);
+            Assert.AreEqual("Invalid file", exceptionMessage);
+        }
+
+        /// <summary>
+        /// check when user pass invalid extension
+        /// then generate exception.
+        /// </summary>
+        [Test]
+        public void GiveExtensionFileStateCode_ShouldReturnInvalidExtension()
+        {
+            object exceptionMessage = stateCode(headerStateCode, delimeter, wrongStateCodePathExtension);
+            Assert.AreEqual("Invalid Extension of file", exceptionMessage);
+        }
+
+        /// <summary>
+        /// Check if imported file's extension is incorrect
+        /// then generate the exception.
+        /// </summary>
+        [Test]
+        public void GivenDelimeterStateCode_ShouldReturnIncorrectDelimeter()
+        {
+            object exceptionMessage = stateCode(headerStateCode, IncorrectDelimeter, stateCodePath);
+            Assert.AreEqual("Incorrect Delimeter", exceptionMessage);
+        }
+
+        /// <summary>
+        /// If header is not same then generate the exception
+        /// </summary>
+        [Test]
+        public void GivenHeaderOfStateCode_ShouldReturnInvalidHeader()
+        {
+            object exceptionMessage = stateCode(invalidHeaderStateCode, delimeter, stateCodePath);
+            Assert.AreEqual("Invalid Header", exceptionMessage);
+        }
+
+        /// <summary>
+        /// Check for return first state name.
+        /// after sorting.
+        /// </summary>
+        [Test]
+        public void GivenStateCensusDataAndAddToJsonPathAndSorting_ShouldReturnFirstState()
+        {
+            string expected = "Andhra Pradesh";
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCensusPath, jsonPathstateCensus, "State");
+            Assert.AreEqual(expected, lastValue);
+        }
+
+        /// <summary>
+        ///  /// Check for return last state name.
+        /// after sorting.
+        /// </summary>
+        [Test]
+        public void GivenStateCensusDataAndAddToJsonPathAndSorting__ShouldReturnLastState()
+        {
+            string expected = "West Bengal";
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCensusPath, jsonPathstateCensus, "State");
+            Assert.AreEqual(expected, lastValue);
+        }
+
+        /// <summary>
+        ///check for StateCodeCsv and json path to add into json after sorting return return first stateCode.
+        /// </summary>
+        [Test]
+        public void GivenStateCensusDataAndAddToJsonPathAndSorting_ShouldReturnFirstStateCode()
+        {
+            string expected = "AD";
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCodePath, jsonPathstateCode, "StateCode");
+            Assert.AreEqual(expected, lastValue);
+        }
+
+        /// <Test 14>
+        /// check for StateCodeCsv and json path to add into json after sorting return return last stateCode.
+        /// </Test 14>
+        [Test]
+        public void GivenStateCensusDataAndAddToJsonPathAndSorting_ShouldReturnLatStateCode()
+        {
+            string expected = "WB";
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCodePath, jsonPathstateCode, "StateCode");
+            Assert.AreEqual(expected, lastValue);
+        }
+
+        /// <Test 15>
+        ///Check for StateCensuscsv and json path to add into json after sorting return most Population.
+        /// </Test 15>
+        [Test]
+        public void CheckStateCensusDataAndAddToJsonPathAndSortFromMostPopulousToLeast_ReturnTheNumberOfSatetesSorted()
+        {
+            string expected = "199812341";
+            string mostPopulation = JSONCensus.ReturnDataNumberOfStatesSortCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "Population");
+            Assert.AreEqual(expected, mostPopulation);
         }
     }
 }

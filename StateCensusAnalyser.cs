@@ -4,7 +4,7 @@ using System.IO;
 
 namespace CensusAnalyzer
 {
-    public class StateCensusAnalyser : baseStateCensusAnalyser
+    public class StateCensusAnalyser : CsvStateCensusReadRecord
     {
        public StateCensusAnalyser(string Path) : base(Path)
         {
