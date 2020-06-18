@@ -49,5 +49,10 @@ namespace CensusAnalyzer
         {
             throw new NotImplementedException();
         }
+
+        public object CsvUSCensusDataReadRecord(string[] header, char delimeter, string givenPath)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

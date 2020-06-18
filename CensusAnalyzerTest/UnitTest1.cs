@@ -28,6 +28,10 @@ namespace CensusAnalyzerTest
         readonly char delimeter = ',';
         readonly char IncorrectDelimeter = ';';
 
+        //File path declaration for US census data.
+        public string USDataPath = @"C:\Users\HP\source\repos\CensusAnalyzer\USCensusData.csv";
+        public string[] headerUSData = { "State Id", "State", "Population", "Housing units", "Total area", "Water area", "Land area", "Population Density", "Housing Density" };
+
         //Declaration of JSON file path.
         public string stateCensusDataPathJSON = @"C:\Users\HP\source\repos\CensusAnalyzer\StateCensusData.json";
         public string stateCodePathJSON = @"C:\Users\HP\source\repos\CensusAnalyzer\StateCode.json";

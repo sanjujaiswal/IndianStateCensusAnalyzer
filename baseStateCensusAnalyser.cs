@@ -38,6 +38,8 @@ namespace CensusAnalyzer
                     throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, "Invalid file");
                 }
 
+                // streams are used to read/write data from large files
+                //CsvReader is open source C# library to read CSV data from strings/textFiles
                 CsvReader csvRecords = new CsvReader(new StreamReader(filePath), true);
                 int fieldCount = csvRecords.FieldCount;
                 string[] headers = csvRecords.GetFieldHeaders();
