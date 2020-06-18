@@ -3,14 +3,14 @@ using NUnit.Framework;
 using static CensusAnalyzer.StateCensusAnalyserDao;
 using static CensusAnalyzer.CsvStatesDao;
 
-namespace Tests
+namespace CensusAnalyzerTest
 {
-    public class CensusTests
+    public class Tests
     {
         readonly CsvStateCensusDataDao stateCensus = CSVFactory.DelegateOfStateCensusAnalyser();
         readonly CsvStateCodeDataDao stateCode = CSVFactory.DelegateOfCsvStates();
 
-        // FilePath ,Valid and Invalid Headers of StateCensusData
+        // FilePath ,Valid and Invalid Headers of StateCensusData.
         public string stateCensusDataPath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
         public string wrongStateCensusDataPath = @"C:\Users\HP\source\repos\CensusAnalyzer\WrongIndiaStateCensusData.csv";
         public string wrongStateCensusDataPathExtension = @"C:\Users\Admin\source\repos\CensusAnalyserProblem\CensusAnalyserProblem\IndiaStateCensusData.txt";
@@ -25,13 +25,13 @@ namespace Tests
         public string[] headerStateCode = { "SrNo", "State", "PIN", "StateCode" };
         public string[] invalidHeaderStateCode = { "SrNo", "StateInvalid", "PIN", "StateCode" };
 
-        // Delimeter declaration
-        char delimeter = ',';
-        char IncorrectDelimeter = ';';
+        // Delimeter declaration.
+        readonly char delimeter = ',';
+        readonly char IncorrectDelimeter = ';';
 
-        // JSON file path
-        public string jsonPathstateCensus = @"C:\Users\HP\source\repos\CensusAnalyzer\StateCensusData.json";
-        public string jsonPathstateCode = @"C:\Users\HP\source\repos\CensusAnalyzer\StateCode.json";
+        //Declaration of JSON file path.
+        public string stateCensusDataPathJSON = @"C:\Users\HP\source\repos\CensusAnalyzer\StateCensusData.json";
+        public string stateCodePathJSON = @"C:\Users\HP\source\repos\CensusAnalyzer\StateCode.json";
 
         [SetUp]
         public void Setup()
@@ -132,7 +132,7 @@ namespace Tests
         public void GivenDelimeterStateCode_ShouldReturnIncorrectDelimeter()
         {
             object exceptionMessage = stateCode(headerStateCode, IncorrectDelimeter, stateCodePath);
-            Assert.AreEqual("Incorrect Delimeter", exceptionMessage);
+            Assert.AreEqual("Invalid Delimeter", exceptionMessage);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace Tests
         public void GivenStateCensusDataAndAddToJsonPathAndSorting_ShouldReturnFirstState()
         {
             string expected = "Andhra Pradesh";
-            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCensusPath, jsonPathstateCensus, "State");
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCensusPath, stateCensusDataPathJSON, "State");
             Assert.AreEqual(expected, lastValue);
         }
 
@@ -165,7 +165,7 @@ namespace Tests
         public void GivenStateCensusDataAndAddToJsonPathAndSorting__ShouldReturnLastState()
         {
             string expected = "West Bengal";
-            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCensusPath, jsonPathstateCensus, "State");
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCensusPath, stateCensusDataPathJSON, "State");
             Assert.AreEqual(expected, lastValue);
         }
 
@@ -176,7 +176,7 @@ namespace Tests
         public void GivenStateCensusDataAndAddToJsonPathAndSorting_ShouldReturnFirstStateCode()
         {
             string expected = "AD";
-            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCodePath, jsonPathstateCode, "StateCode");
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(stateCodePath, stateCodePathJSON, "StateCode");
             Assert.AreEqual(expected, lastValue);
         }
 
@@ -184,10 +184,10 @@ namespace Tests
         /// check for StateCodeCsv and json path to add into json after sorting return return last stateCode.
         /// </Test 14>
         [Test]
-        public void GivenStateCensusDataAndAddToJsonPathAndSorting_ShouldReturnLatStateCode()
+        public void GivenStateCensusDataAndAddToJsonPathAndSorting_ShouldReturnLastStateCode()
         {
             string expected = "WB";
-            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCodePath, jsonPathstateCode, "StateCode");
+            string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(stateCodePath, stateCodePathJSON, "StateCode");
             Assert.AreEqual(expected, lastValue);
         }
 
@@ -198,7 +198,7 @@ namespace Tests
         public void CheckStateCensusDataAndAddToJsonPathAndSortFromMostPopulousToLeast_ReturnTheNumberOfSatetesSorted()
         {
             string expected = "199812341";
-            string mostPopulation = JSONCensus.ReturnDataNumberOfStatesSortCSVFileAndWriteInJson(stateCensusPath, jsonPathstateCensus, "Population");
+            string mostPopulation = JSONCensus.ReturnDataNumberOfStatesSortCSVFileAndWriteInJson(stateCensusPath, stateCensusDataPathJSON, "Population");
             Assert.AreEqual(expected, mostPopulation);
         }
     }

@@ -42,6 +42,10 @@
               "target": "Package",
               "version": "[1.2.0.5, )"
             },
+            "ChoETL.JSON": {
+              "target": "Package",
+              "version": "[1.2.0.5, )"
+            },
             "CsvHelper": {
               "target": "Package",
               "version": "[15.0.5, )"
@@ -79,6 +83,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[3.16.1, )"
+            },
+            "System.IO": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [

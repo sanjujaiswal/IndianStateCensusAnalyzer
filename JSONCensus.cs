@@ -11,13 +11,6 @@ namespace CensusAnalyzer
 {
     public class JSONCensus
     {
-        /// <summary>
-        /// Method to write the First state data using json
-        /// </summary>
-        /// <param name="filePath"></param>
-        /// <param name="jsonFilepath"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
         public static string SortCsvFileWriteInJsonAndReturnFirstData(string filePath, string jsonFilepath, string key)
         {
             string readFile = File.ReadAllText(filePath);

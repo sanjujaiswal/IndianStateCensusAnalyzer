@@ -1,0 +1,224 @@
+[
+  {
+    "SrNo": 3,
+    "State": "Andhra Pradesh New",
+    "PIN": 37,
+    "StateCode": "AD"
+  },
+  {
+    "SrNo": 1,
+    "State": "Andaman and Nicobar Islands",
+    "PIN": 35,
+    "StateCode": "AN"
+  },
+  {
+    "SrNo": 2,
+    "State": "Andhra Pradesh",
+    "PIN": 28,
+    "StateCode": "AP"
+  },
+  {
+    "SrNo": 4,
+    "State": "Arunachal Pradesh",
+    "PIN": 12,
+    "StateCode": "AR"
+  },
+  {
+    "SrNo": 5,
+    "State": "Assam",
+    "PIN": 18,
+    "StateCode": "AS"
+  },
+  {
+    "SrNo": 6,
+    "State": "Bihar",
+    "PIN": 10,
+    "StateCode": "BH"
+  },
+  {
+    "SrNo": 7,
+    "State": "Chandigarh",
+    "PIN": 4,
+    "StateCode": "CH"
+  },
+  {
+    "SrNo": 8,
+    "State": "Chattisgarh",
+    "PIN": 22,
+    "StateCode": "CT"
+  },
+  {
+    "SrNo": 10,
+    "State": "Daman and Diu",
+    "PIN": 25,
+    "StateCode": "DD"
+  },
+  {
+    "SrNo": 11,
+    "State": "Delhi",
+    "PIN": 7,
+    "StateCode": "DL"
+  },
+  {
+    "SrNo": 9,
+    "State": "Dadra and Nagar Haveli",
+    "PIN": 26,
+    "StateCode": "DN0"
+  },
+  {
+    "SrNo": 12,
+    "State": "Goa",
+    "PIN": 30,
+    "StateCode": "GA"
+  },
+  {
+    "SrNo": 13,
+    "State": "Gujarat",
+    "PIN": 24,
+    "StateCode": "GJ"
+  },
+  {
+    "SrNo": 15,
+    "State": "Himachal Pradesh",
+    "PIN": 2,
+    "StateCode": "HP"
+  },
+  {
+    "SrNo": 14,
+    "State": "Haryana",
+    "PIN": 6,
+    "StateCode": "HR"
+  },
+  {
+    "SrNo": 17,
+    "State": "Jharkhand",
+    "PIN": 20,
+    "StateCode": "JH"
+  },
+  {
+    "SrNo": 16,
+    "State": "Jammu and Kashmir",
+    "PIN": 1,
+    "StateCode": "JK"
+  },
+  {
+    "SrNo": 18,
+    "State": "Karnataka",
+    "PIN": 29,
+    "StateCode": "KA"
+  },
+  {
+    "SrNo": 19,
+    "State": "Kerala",
+    "PIN": 32,
+    "StateCode": "KL"
+  },
+  {
+    "SrNo": 20,
+    "State": "Lakshadweep Islands",
+    "PIN": 31,
+    "StateCode": "LD"
+  },
+  {
+    "SrNo": 24,
+    "State": "Meghalaya",
+    "PIN": 17,
+    "StateCode": "ME"
+  },
+  {
+    "SrNo": 22,
+    "State": "Maharashtra",
+    "PIN": 27,
+    "StateCode": "MH"
+  },
+  {
+    "SrNo": 25,
+    "State": "Mizoram",
+    "PIN": 15,
+    "StateCode": "MI"
+  },
+  {
+    "SrNo": 23,
+    "State": "Manipur",
+    "PIN": 14,
+    "StateCode": "MN"
+  },
+  {
+    "SrNo": 21,
+    "State": "Madhya Pradesh",
+    "PIN": 23,
+    "StateCode": "MP"
+  },
+  {
+    "SrNo": 26,
+    "State": "Nagaland",
+    "PIN": 13,
+    "StateCode": "NL"
+  },
+  {
+    "SrNo": 27,
+    "State": "Odisha",
+    "PIN": 21,
+    "StateCode": "OR"
+  },
+  {
+    "SrNo": 29,
+    "State": "Punjab",
+    "PIN": 3,
+    "StateCode": "PB"
+  },
+  {
+    "SrNo": 28,
+    "State": "Pondicherry",
+    "PIN": 34,
+    "StateCode": "PY"
+  },
+  {
+    "SrNo": 30,
+    "State": "Rajasthan",
+    "PIN": 8,
+    "StateCode": "RJ"
+  },
+  {
+    "SrNo": 31,
+    "State": "Sikkim",
+    "PIN": 11,
+    "StateCode": "SK"
+  },
+  {
+    "SrNo": 32,
+    "State": "Tamil Nadu",
+    "PIN": 33,
+    "StateCode": "TN"
+  },
+  {
+    "SrNo": 34,
+    "State": "Tripura",
+    "PIN": 16,
+    "StateCode": "TR"
+  },
+  {
+    "SrNo": 33,
+    "State": "Telangana",
+    "PIN": 36,
+    "StateCode": "TS"
+  },
+  {
+    "SrNo": 35,
+    "State": "Uttar Pradesh",
+    "PIN": 9,
+    "StateCode": "UP"
+  },
+  {
+    "SrNo": 36,
+    "State": "Uttarakhand",
+    "PIN": 5,
+    "StateCode": "UT"
+  },
+  {
+    "SrNo": 37,
+    "State": "West Bengal",
+    "PIN": 19,
+    "StateCode": "WB"
+  }
+]
