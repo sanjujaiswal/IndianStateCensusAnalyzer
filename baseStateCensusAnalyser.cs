@@ -42,6 +42,7 @@ namespace CensusAnalyzer
                 int fieldCount = csvRecords.FieldCount;
                 string[] headers = csvRecords.GetFieldHeaders();
                 delimeter = csvRecords.Delimiter;
+
                 // string ArrayList
                 List<string[]> record = new List<string[]>();
                 while (csvRecords.ReadNextRecord())
@@ -78,10 +79,10 @@ namespace CensusAnalyzer
             {
                 throw new Exception(exception.Message);
             }
-        }// End of ReadRecords
+        }
 
         //method will compare two headers 
-        // if same return true , if not return false
+        //return true if same, otherwise return false
         private bool IsHeaderSame(string[] passHeader, string[] headers)
         {
             if (passHeader.Length != headers.Length)
@@ -97,7 +98,7 @@ namespace CensusAnalyzer
                 }
             }
             return true;
-        }//End of isHeadersame
+        }
 
         /// <summary>
         /// Declare Dictionary to store its key and value
@@ -136,7 +137,7 @@ namespace CensusAnalyzer
         {
             string jsonFile = File.ReadAllText(jsonFilePath);
             JArray CensusArray = JArray.Parse(jsonFile);
-            //bubble sort
+            //bubble sort data in ascending order
             for (int i = 0; i < CensusArray.Count - 1; i++)
             {
                 for (int j = 0; j < CensusArray.Count - i - 1; j++)
@@ -152,12 +153,18 @@ namespace CensusAnalyzer
             return CensusArray;
         }
 
+        /// <summary>
+        /// Sort json data file in ascending order based on key value pairs. 
+        /// </summary>
+        /// <param name="jsonPath"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static JArray SortJsonBasedOnKeyAndValueIsNumber(string jsonPath, string key)
         {
             string jsonFile = File.ReadAllText(jsonPath);
             //parsing a json file
             JArray CensusArray = JArray.Parse(jsonFile);
-            //sorting in sorting in ascending order
+            //using bubble sort to sort the data in ascending order.
             for (int i = 0; i < CensusArray.Count - 1; i++)
             {
                 for (int j = 0; j < CensusArray.Count - i - 1; j++)
@@ -174,7 +181,7 @@ namespace CensusAnalyzer
         }
 
         /// <summary>
-        /// Method to retrive the first state data
+        /// Method to retrive the first state data based on key.
         /// </summary>
         /// <param name="jsonPath"></param>
         /// <param name="key"></param>
@@ -187,7 +194,7 @@ namespace CensusAnalyzer
             return firstValue;
         }
         /// <summary>
-        /// Method to retrive the last state data
+        /// Method to retrive the last state data based on key.
         /// </summary>
         /// <param name="jsonPath"></param>
         /// <param name="key"></param>

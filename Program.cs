@@ -7,21 +7,17 @@ namespace CensusAnalyzer
         static void Main1(string[] args)
         {
         }
-        public static string stateCensusPath = @"C:\Users\Admin\source\repos\CensusAnalyserProblem\CensusAnalyserProblem\StateCensusData.csv";
-        // variables declaration
+        public static string stateCensusPath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
         string[] header;
         char delimeter;
         string givenPath;
-
-        // Main Method
-       //end: static void Main(string[] args)
 
         // Default Constructor
         public StateCensusAnalyserDao()
         {
         }
 
-        // CsvStates parameterised constructor
+        //Parameterised constructor of stateCensusAnalyserDao
         public StateCensusAnalyserDao(string[] header, char delimeter, string givenPath)
         {
             this.header = header;
@@ -34,7 +30,7 @@ namespace CensusAnalyzer
 
         /// <CsvStateCodeReadRecord>
         /// Creating object of class 'CensusReadRecord' as 'stateCodePathObject,
-        /// return object is returnrd to test case.
+        /// return object is returned to test case.
         /// </CsvStateCodeReadRecord>
         /// <returns></returnObject>
         public static object CsvStateCensusReadRecord(string[] header, char delimeter, string givenPath)

@@ -10,20 +10,19 @@ namespace CensusAnalyzerTest
         readonly CsvStateCensusDataDao stateCensus = CSVFactory.DelegateOfStateCensusAnalyser();
         readonly CsvStateCodeDataDao stateCode = CSVFactory.DelegateOfCsvStates();
 
-        // FilePath ,Valid and Invalid Headers of StateCensusData.
+        // Declaration of FilePath for Valid and Invalid Headers of StateCensusData.
         public string stateCensusDataPath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
         public string wrongStateCensusDataPath = @"C:\Users\HP\source\repos\CensusAnalyzer\WrongIndiaStateCensusData.csv";
         public string wrongStateCensusDataPathExtension = @"C:\Users\Admin\source\repos\CensusAnalyserProblem\CensusAnalyserProblem\IndiaStateCensusData.txt";
         public string[] headerStateCensus = { "State", "Population", "AreaInSqKm", "DensityPerSqKm" };
-        public string[] invalidHeaderStateCensus = { "State", "InvalidHeader", "AreaInSqKm", "DensityPerSqKm" };
+        public string[] invalidHeaderStateCensus = { "StateInvalid", "Header", "AreaInSqKm", "DensityPerSqKm" };
 
-        // Given File Path valid and invalid names.
-        //Given Header valid and invalid names.
+        // Given File Path of IndiaStateCode valid and invalid.
         public string stateCodePath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-        public string wrongStateCodePath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
-        public string wrongStateCodePathExtension = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.txt";
+        public string wrongStateCodePath = @"C:\Users\HP\source\repos\MoodAnalyzer\IndiaStateCode.csv";
+        public string wrongExtensionStateCodePath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.pdf";
         public string[] headerStateCode = { "SrNo", "State", "PIN", "StateCode" };
-        public string[] invalidHeaderStateCode = { "SrNo", "StateInvalid", "PIN", "StateCode" };
+        public string[] invalidHeaderStateCode = { "SrNo", "State", "PIN", "StateCodeInvalid" };
 
         // Delimeter declaration.
         readonly char delimeter = ',';
@@ -120,7 +119,7 @@ namespace CensusAnalyzerTest
         [Test]
         public void GiveExtensionFileStateCode_ShouldReturnInvalidExtension()
         {
-            object exceptionMessage = stateCode(headerStateCode, delimeter, wrongStateCodePathExtension);
+            object exceptionMessage = stateCode(headerStateCode, delimeter, wrongExtensionStateCodePath);
             Assert.AreEqual("Invalid Extension of file", exceptionMessage);
         }
 
@@ -200,6 +199,14 @@ namespace CensusAnalyzerTest
             string expected = "199812341";
             string mostPopulation = JSONCensus.ReturnDataNumberOfStatesSortCSVFileAndWriteInJson(stateCensusPath, stateCensusDataPathJSON, "Population");
             Assert.AreEqual(expected, mostPopulation);
+        }
+
+        [Test]
+        public void CheckStateCensusDataAndAddToJsonPathAndSortFromMostDensityPerKmLeast_ReturnDensityPerSqKm()
+        {
+            string expected = "1102";
+            string mostDensityPerKm = JSONCensus.ReturnDataNumberOfStatesSortCSVFileAndWriteInJson(stateCensusPath, stateCodePathJSON, "DensityPerSqKm");
+            Assert.AreEqual(expected, mostDensityPerKm);
         }
     }
 }
