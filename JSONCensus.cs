@@ -11,6 +11,13 @@ namespace CensusAnalyzer
 {
     public class JSONCensus
     {
+        /// <summary>
+        /// method to Return first state data using json
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="jsonFilepath"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
         public static string SortCsvFileWriteInJsonAndReturnFirstData(string filePath, string jsonFilepath, string key)
         {
             string readFile = File.ReadAllText(filePath);
@@ -30,7 +37,7 @@ namespace CensusAnalyzer
         }
 
         /// <summary>
-        /// Method to write the last state data using json
+        /// Method to return/show the last state data using json
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="jsonFilepath"></param>
@@ -54,7 +61,7 @@ namespace CensusAnalyzer
         }
 
         /// <summary>
-        /// Method to sorting the most population
+        /// Method to sorting the most populated state.
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="jsonFilepath"></param>

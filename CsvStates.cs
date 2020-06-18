@@ -6,13 +6,14 @@ namespace CensusAnalyzer
 {
     public class CsvStatesDao : ICSVBuilder
     {
-        public static string stateCodePath = @"C:\Users\Admin\source\repos\CensusAnalyserProblem\CensusAnalyserProblem\StateCode.csv";
+        public static string stateCodePath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
+
         // variables declaration
         readonly string[] header;
         readonly char delimeter;
         readonly string givenPath;
 
-        // Default Constructor
+        // Default Constructor declaration
         public CsvStatesDao()
         {
         }
@@ -39,7 +40,11 @@ namespace CensusAnalyzer
             var returnObject = stateCodePathObject.ReadRecords(header, delimeter, givenPath);
             return returnObject;
         }
-
+        
+        /// <summary>
+        /// CsvStateDao method 
+        /// </summary>
+        /// <returns></returns>
         private static CsvStatesDao InstanceOfCsvStates()
         {
             throw new NotImplementedException();
@@ -49,7 +54,13 @@ namespace CensusAnalyzer
         {
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="header"></param>
+        /// <param name="delimeter"></param>
+        /// <param name="givenPath"></param>
+        /// <returns></returns>
         object ICSVBuilder.CsvStateCensusReadRecord(string[] header, char delimeter, string givenPath)
         {
             throw new NotImplementedException();
@@ -59,5 +70,5 @@ namespace CensusAnalyzer
         {
             throw new NotImplementedException();
         }
-    }//End of class CsvStates    
+    }  
 }

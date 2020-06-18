@@ -12,8 +12,11 @@ namespace CensusAnalyzer
             CsvStateCensusDataDao getStateCensus = new CsvStateCensusDataDao(StateCensusAnalyserDao.CsvStateCensusReadRecord);
             return getStateCensus;
         }
-
-        // Method to creating instance of CsvStates
+        
+        /// <summary>
+        /// Create csvStateCodedataDao instance
+        /// </summary>
+        /// <returns></returns>
         public static CsvStateCodeDataDao DelegateOfCsvStates()
         {
             CsvStatesDao csvStateData = InstanceOfCsvStates();
