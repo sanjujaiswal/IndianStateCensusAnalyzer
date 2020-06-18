@@ -82,5 +82,46 @@ namespace CensusAnalyzer
             File.WriteAllText(jsonFilepath, jsonArray);
             return CsvStateCensusReadRecord.RetriveLastDataOnKey(jsonFilepath, key);
         }
+
+        //Method to sorting the least populated state.
+
+        public static string ReturnDataNumberOfStatesSortLowestCSVFileAndWriteInJson(string filePath, string jsonFilepath, string key)
+        {
+            string readFile = File.ReadAllText(filePath);
+            StringBuilder stringbuilder = new StringBuilder();
+            using (var reader = ChoCSVReader.LoadText(readFile)
+                                            .WithFirstLineHeader())
+            {
+                using (var writer = new ChoJSONWriter(stringbuilder)) writer.Write(reader);
+            }
+            File.WriteAllText(jsonFilepath, stringbuilder.ToString());
+            JArray array = CsvStateCensusReadRecord.SortJsonBasedOnKeyAndValueIsNumber(jsonFilepath, key);
+            var jsonArray = JsonConvert.SerializeObject(array, Formatting.Indented);
+            File.WriteAllText(jsonFilepath, jsonArray);
+            return CsvStateCensusReadRecord.RetriveFirstDataOnKey(jsonFilepath, key);
+        }
+
+        /// <summary>
+        /// Method to sort most populated states.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="jsonFilepath"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string ReturnDataNumberOfStatesHighestSortCSVFileAndWriteInJson(string filePath, string jsonFilepath, string key)
+        {
+            string readFile = File.ReadAllText(filePath);
+            StringBuilder stringbuilder = new StringBuilder();
+            using (var reader = ChoCSVReader.LoadText(readFile)
+                                            .WithFirstLineHeader())
+            {
+                using (var writer = new ChoJSONWriter(stringbuilder)) writer.Write(reader);
+            }
+            File.WriteAllText(jsonFilepath, stringbuilder.ToString());
+            JArray array = CsvStateCensusReadRecord.SortJsonBasedOnKeyAndValueIsNumber(jsonFilepath, key);
+            var jsonArray = JsonConvert.SerializeObject(array, Formatting.Indented);
+            File.WriteAllText(jsonFilepath, jsonArray);
+            return CsvStateCensusReadRecord.RetriveLastDataOnKey(jsonFilepath, key);
+        }
     }
 }
