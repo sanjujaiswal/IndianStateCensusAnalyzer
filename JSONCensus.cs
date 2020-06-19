@@ -12,7 +12,7 @@ namespace CensusAnalyzer
     public class JSONCensus
     {
         /// <summary>
-        /// method to Return first state data using json
+        /// method to Return first state data from json file.
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="jsonFilepath"></param>
@@ -37,7 +37,7 @@ namespace CensusAnalyzer
         }
 
         /// <summary>
-        /// Method to return/show the last state data using json
+        /// Method to return/show the last state data from json file.
         /// </summary>
         /// <param name="filePath"></param>
         /// <param name="jsonFilepath"></param>
@@ -54,6 +54,7 @@ namespace CensusAnalyzer
             }
             File.WriteAllText(jsonFilepath, stringbuilder.ToString());
             JArray array = CsvStateCensusReadRecord.SortingJsonBasedOnKey(jsonFilepath, key);
+
             // serialize JSON to a string and then write string to a file
             var jsonArray = JsonConvert.SerializeObject(array, Formatting.Indented);
             File.WriteAllText(jsonFilepath, jsonArray);
@@ -70,6 +71,8 @@ namespace CensusAnalyzer
         public static string ReturnDataNumberOfStatesSortCSVFileAndWriteInJson(string filePath, string jsonFilepath, string key)
         {
             string readFile = File.ReadAllText(filePath);
+            //StringBuilder can not inherited, its mutable means
+            //we can modify the data
             StringBuilder stringbuilder = new StringBuilder();
             using (var reader = ChoCSVReader.LoadText(readFile)
                                             .WithFirstLineHeader())

@@ -13,7 +13,7 @@ namespace CensusAnalyzer
         char delimeter;
         int numberOfRecord;
 
-        // Default Constructor
+        //When there is no constructor then Default Constructor will called.
         public CsvStateCensusReadRecord()
         {
         }
@@ -25,6 +25,13 @@ namespace CensusAnalyzer
         }
 
         // Declaration of ReadRecords Method
+        /// <summary>
+        /// Catches all type of exceptions generated.
+        /// </summary>
+        /// <param name="passHeader"></param>
+        /// <param name="in_delimeter"></param>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
         public object ReadRecords(string[] passHeader = null, char in_delimeter = ',', string filePath = null)
         {
             try
@@ -38,7 +45,7 @@ namespace CensusAnalyzer
                     throw new CensusAnalyserException(CensusAnalyserException.ExceptionType.FILE_NOT_FOUND, "Invalid file");
                 }
 
-                // streams are used to read/write data from large files
+                // streams are used to read/write data from csv files
                 //CsvReader is open source C# library to read CSV data from strings/textFiles
                 CsvReader csvRecords = new CsvReader(new StreamReader(filePath), true);
                 int fieldCount = csvRecords.FieldCount;
@@ -103,7 +110,7 @@ namespace CensusAnalyzer
         }
 
         /// <summary>
-        /// Sorting json data based on key
+        /// Sorting json data based on key using bubble sort.
         /// </summary>
         /// <param name="jsonFilePath"></param>
         /// <param name="key"></param>
@@ -156,7 +163,7 @@ namespace CensusAnalyzer
         }
 
         /// <summary>
-        /// Method to retrive the first state data based on key.
+        /// Get first data from json format using key value pair.
         /// </summary>
         /// <param name="jsonPath"></param>
         /// <param name="key"></param>
@@ -170,7 +177,7 @@ namespace CensusAnalyzer
         }
 
         /// <summary>
-        /// Method to retrive the last state data based on key.
+        /// Get first data from json format using key value pair.
         /// </summary>
         /// <param name="jsonPath"></param>
         /// <param name="key"></param>

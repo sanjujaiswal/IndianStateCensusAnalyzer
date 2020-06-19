@@ -36,6 +36,12 @@ namespace CensusAnalyzer
             return getUSData;
         }
 
+        /// <summary>
+        ///Method to creating instance of USCensusDataDao,
+        ///CsvStateDao and StatesCensusAnalyserDao.
+        /// </summary>
+        /// <returns></returns>
+
         private static USCensusDataDao InstanceOfUSCensusData()
         {
             throw new NotImplementedException();

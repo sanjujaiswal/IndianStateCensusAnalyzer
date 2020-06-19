@@ -12,7 +12,7 @@ namespace CensusAnalyzer
         char delimeter;
         string givenPath;
 
-        // Default Constructor
+        //When there is no constructor then Default Constructor will called.
         public StateCensusAnalyserDao()
         {
         }
@@ -50,7 +50,7 @@ namespace CensusAnalyzer
             throw new NotImplementedException();
         }
 
-        public object CsvUSCensusDataReadRecord(string[] header, char delimeter, string givenPath)
+        object ICSVBuilder.CsvUSCensusDataReadRecord(string[] header, char delimeter, string givenPath)
         {
             throw new NotImplementedException();
         }
