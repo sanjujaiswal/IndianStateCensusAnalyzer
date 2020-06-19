@@ -40,22 +40,9 @@ namespace CensusAnalyzer
             var returnObject = stateCodePathObject.ReadRecords(header, delimeter, givenPath);
             return returnObject;
         }
-        
-        /// <summary>
-        /// CsvStateDao method 
-        /// </summary>
-        /// <returns></returns>
-        private static CsvStatesDao InstanceOfCsvStates()
-        {
-            throw new NotImplementedException();
-        }
 
-        private static StateCensusAnalyserDao InstanceOfStateCensusAnalyser()
-        {
-            throw new NotImplementedException();
-        }
         /// <summary>
-        /// 
+        /// Creating method to handle exception for Not implemented exceptions.
         /// </summary>
         /// <param name="header"></param>
         /// <param name="delimeter"></param>
@@ -63,6 +50,7 @@ namespace CensusAnalyzer
         /// <returns></returns>
         object ICSVBuilder.CsvStateCensusReadRecord(string[] header, char delimeter, string givenPath)
         {
+            // we have method 
             throw new NotImplementedException();
         }
 
@@ -71,7 +59,7 @@ namespace CensusAnalyzer
             throw new NotImplementedException();
         }
 
-        public object CsvUSCensusDataReadRecord(string[] header, char delimeter, string givenPath)
+        object ICSVBuilder.CsvUSCensusDataReadRecord(string[] header, char delimeter, string givenPath)
         {
             throw new NotImplementedException();
         }
