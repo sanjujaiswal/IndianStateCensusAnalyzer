@@ -247,7 +247,7 @@ namespace CensusAnalyzerTest
         /// Test for StateCensuscsv and json path to add into json after sorting return Least AreaInSqKm.
         /// </Test 20>
         [Test]
-        public void CheckStateCensusDataAndAddToJsonPathAndSortFromLeastAreaInSqKmToMost_ReturnAreaInSqKmv()
+        public void GivenStateCensusDataAndAddToJsonPathAndSortFromLeastAreaInSqKmToMost_ReturnAreaInSqKmv()
         {
             string expected = "3702";
             string mostDensityPerKm = JSONCensus.ReturnDataNumberOfStatesSortLowestCSVFileAndWriteInJson(stateCensusPath, stateCensusDataPathJSON, "AreaInSqKm");
@@ -255,7 +255,7 @@ namespace CensusAnalyzerTest
         }
 
         [Test]
-        public void CheckUSCensusDataNumberOFRecords()
+        public void GivenUSCensusData_ShouldReturnNumberOFRecords()
         {
             var returnRecords = USCensus;
             Assert.AreEqual(51, returnRecords);
@@ -289,7 +289,7 @@ namespace CensusAnalyzerTest
         ///  Test for USCensuscsv and json path to add into json after sorting return return first state.
         /// </Test 24>
         [Test]
-        public void CheckUSCensusDataAndAddToJsonPathAndSorting_ReturnFirstState()
+        public void GivenUSCensusDataAndAddToJsonPathAndSorting_ReturnFirstState()
         {
             string expected = "Alabama";
             string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnFirstData(USDataPath, usDataPathJSON, "State");
@@ -300,59 +300,11 @@ namespace CensusAnalyzerTest
         ///  Test for USCensuscsv and json path to add into json after sorting return return last state.
         /// </Test 25>
         [Test]
-        public void CheckUSCensusDataAndAddToJsonPathAndSorting_ReturnLastState()
+        public void GivenUSCensusDataAndAddToJsonPathAndSorting_ReturnLastState()
         {
             string expected = "Wyoming";
             string lastValue = JSONCensus.SortCsvFileWriteInJsonAndReturnLastData(USDataPath, usDataPathJSON, "State");
             Assert.AreEqual(expected, lastValue);
-        }
-
-        /// <Test 26>
-        /// Converting CSv file to JSON  and sorting it 
-        /// and returning most populus density.
-        /// </Test 26>
-        [Test]
-        public void GivenCsvUSCensusAndJson_ToSortFromMostPopulousDensityToLeast_ReturnMostPopulationDensity()
-        {
-            string expected = "3805.61";
-            string mostPopulationDensity = JSONCensus.ReturnDataNumberOfStatesHighestSortCSVFileAndWriteInJson(USDataPath, usDataPathJSON, "Population Density");
-            Assert.AreEqual(expected, mostPopulationDensity);
-        }
-
-        /// <Test 27>
-        /// Converting CSv file to JSON  and sorting it 
-        /// and returning least populus density.
-        /// </Test 27>
-        [Test]
-        public void GivenCsvUSCensusAndJson_ToSortFromLeastPopulousDEnsityToMost_ReturnLeastPopulationDensity()
-        {
-            string expected = "0.46";
-            string leastPopulationDensity = JSONCensus.ReturnDataNumberOfStatesSortLowestCSVFileAndWriteInJson(USDataPath, usDataPathJSON, "Population Density");
-            Assert.AreEqual(expected, leastPopulationDensity);
-        }
-
-        /// <Test 28>
-        /// Converting CSv file to JSON  and sorting it 
-        /// and returning Highest Total area.
-        /// </Test 28>
-        [Test]
-        public void GivenCsvUSCensusAndJson_ToSortFromMostTotalAreaToLeast_ReturnMostTotalArea()
-        {
-            string expected = "1723338.01";
-            string mostTotalArea = JSONCensus.ReturnDataNumberOfStatesHighestSortCSVFileAndWriteInJson(USDataPath, usDataPathJSON, "Total area");
-            Assert.AreEqual(expected, mostTotalArea);
-        }
-
-        /// <Test 29>
-        /// Converting CSv file to JSON  and sorting it 
-        /// and returning Lowest Total area.
-        /// </Test 28>
-        [Test]
-        public void GivenCsvUSCensusAndJson_ToSortFromLeastTotalAreaToMost_ReturnLeastTotalArea()
-        {
-            string expected = "177";
-            string mostTotalArea = JSONCensus.ReturnDataNumberOfStatesSortLowestCSVFileAndWriteInJson(USDataPath, usDataPathJSON, "Total area");
-            Assert.AreEqual(expected, mostTotalArea);
         }
     }
 }

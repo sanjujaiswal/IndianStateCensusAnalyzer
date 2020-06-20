@@ -8,9 +8,10 @@ namespace CensusAnalyzer
         {
         }
         public static string stateCensusPath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCensusData.csv";
-        string[] header;
-        char delimeter;
-        string givenPath;
+        public string stateCensusFilePath { get; set; }
+        public char delimeter { get; set; }
+        public string[] header { get; set; }
+        public string givenPath { get; set; }
 
         //When there is no constructor then Default Constructor will called.
         public StateCensusAnalyserDao()

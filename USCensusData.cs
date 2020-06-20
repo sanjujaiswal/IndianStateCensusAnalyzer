@@ -7,10 +7,12 @@ namespace CensusAnalyzer
     public class USCensusDataDao : ICSVBuilder
     {
         public static string USDataPath = @"C:\Users\HP\source\repos\CensusAnalyzer\USCensusData.csv";
-        public string stateCensusFilePath;
-        public char delimeter;
-        public string[] header;
-        public string givenPath;
+        
+        //Declarations of variables
+        public string stateCensusFilePath { get; set; }
+        public char delimeter { get; set; }
+        public string[] header { get; set; }
+        public string givenPath { get; set; }
 
         // For Default Constructor
         public USCensusDataDao()
