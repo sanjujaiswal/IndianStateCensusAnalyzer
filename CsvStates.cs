@@ -9,9 +9,10 @@ namespace CensusAnalyzer
         public static string stateCodePath = @"C:\Users\HP\source\repos\CensusAnalyzer\IndiaStateCode.csv";
 
         // variables declaration
-        readonly string[] header;
-        readonly char delimeter;
-        readonly string givenPath;
+        public string stateCensusFilePath { get; set; }
+        public char delimeter { get; set; }
+        public string[] header { get; set; }
+        public string givenPath { get; set; }
 
         // Default Constructor declaration
         public CsvStatesDao()

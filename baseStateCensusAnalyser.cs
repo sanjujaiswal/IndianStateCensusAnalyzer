@@ -47,6 +47,7 @@ namespace CensusAnalyzer
 
                 // streams are used to read/write data from csv files
                 //CsvReader is open source C# library to read CSV data from strings/textFiles
+               
                 CsvReader csvRecords = new CsvReader(new StreamReader(filePath), true);
                 int fieldCount = csvRecords.FieldCount;
                 string[] headers = csvRecords.GetFieldHeaders();
